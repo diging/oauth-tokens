@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
-import edu.asu.diging.oauth.tokens.config.ConfigurationProvider;
+import edu.asu.diging.oauth.tokens.config.OAuthTokensConfigurationProvider;
 import edu.asu.diging.oauth.tokens.core.exceptions.MethodNotSupportedException;
 
 /**
@@ -23,7 +23,7 @@ public abstract class OAuthTokenBaseController extends AbstractController {
     protected final static String USERNAME_VARIABLE = "username";
     
     @Autowired
-    private ConfigurationProvider configProvider;
+    private OAuthTokensConfigurationProvider configProvider;
     
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         

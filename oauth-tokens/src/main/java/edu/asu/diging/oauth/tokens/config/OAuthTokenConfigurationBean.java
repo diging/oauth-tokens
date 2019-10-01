@@ -12,14 +12,14 @@ import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 public class OAuthTokenConfigurationBean {
 
     @Autowired
-    private ConfigurationProvider configProvider;
+    private OAuthTokensConfigurationProvider configProvider;
     
     @Bean
     public SimpleUrlHandlerMapping handlerMapping() {
         SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
         
         Map<String, Object> urlMappings = new HashMap<>();
-        urlMappings.put(configProvider.getAddAppPath(), "addOAuthClientController");
+        urlMappings.put(configProvider.getAddAppPath(), "addAppController");
         mapping.setUrlMap(urlMappings);
         return mapping;
     }

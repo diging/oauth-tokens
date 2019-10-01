@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import edu.asu.diging.oauth.tokens.config.ConfigurationProvider;
+import edu.asu.diging.oauth.tokens.config.OAuthTokensConfigurationProvider;
 import edu.asu.diging.oauth.tokens.config.OAuthTokens;
 import edu.asu.diging.oauth.tokens.config.OAuthTokensConfiguration;
 
 @Service
-public class ConfigurationProviderImpl implements ConfigurationProvider {
+public class OAuthTokensConfigurationProviderImpl implements OAuthTokensConfigurationProvider {
 
     private OAuthTokens config;
     

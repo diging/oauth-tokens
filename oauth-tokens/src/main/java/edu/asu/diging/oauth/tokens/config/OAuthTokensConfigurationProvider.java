@@ -1,15 +1,15 @@
 package edu.asu.diging.oauth.tokens.config;
 
-import edu.asu.diging.oauth.tokens.config.impl.ConfigurationProviderImpl;
+import edu.asu.diging.oauth.tokens.config.impl.OAuthTokensConfigurationProviderImpl;
 
-public interface ConfigurationProvider {
+public interface OAuthTokensConfigurationProvider {
     
     /**
      * Helper method, if used without component scan or XML bean declaration.
      * @return
      */
-    public static ConfigurationProvider build() {
-        return new ConfigurationProviderImpl();
+    public static OAuthTokensConfigurationProvider build() {
+        return new OAuthTokensConfigurationProviderImpl();
     }
 
     String getAddAppPath();

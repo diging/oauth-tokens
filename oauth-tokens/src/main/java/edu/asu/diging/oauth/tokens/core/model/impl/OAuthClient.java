@@ -26,7 +26,7 @@ public class OAuthClient implements IOAuthClient, ClientDetails {
 
     @Id
     @GeneratedValue(generator = "oauth_client_id_generator")
-    @GenericGenerator(name = "oauth_client_id_generator", parameters = @Parameter(name = "prefix", value = "OAUTHCLIENT"), strategy = "edu.asu.diging.citesphere.core.repository.IdGenerator")
+    @GenericGenerator(name = "oauth_client_id_generator", parameters = @Parameter(name = "prefix", value = "OAUTHCLIENT"), strategy = "edu.asu.diging.oauth.tokens.core.data.IdGenerator")
     private String clientId;
     private String name;
     private String description;

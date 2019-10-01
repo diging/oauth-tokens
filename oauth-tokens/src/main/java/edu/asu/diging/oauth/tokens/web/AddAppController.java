@@ -2,18 +2,20 @@ package edu.asu.diging.oauth.tokens.web;
 
 import java.util.Arrays;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
-import edu.asu.diging.oauth.tokens.config.ConfigurationProvider;
+import edu.asu.diging.oauth.tokens.config.OAuthTokensConfigurationProvider;
 import edu.asu.diging.oauth.tokens.core.exceptions.MethodNotSupportedException;
 import edu.asu.diging.oauth.tokens.core.service.IOAuthClientManager;
 import edu.asu.diging.oauth.tokens.core.service.OAuthCredentials;
@@ -22,21 +24,14 @@ import edu.asu.diging.oauth.tokens.web.forms.AppForm;
 
 @Controller
 public class AddAppController extends OAuthTokenBaseController {
-    
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     @Autowired
-    private ConfigurationProvider configProvider;
-    
+    private OAuthTokensConfigurationProvider configProvider;
+
     @Autowired
     private IOAuthClientManager clientManager;
-    
-   public String post(AppForm appForm, RedirectAttributes redirectAttrs) {
-        OAuthCredentials creds = clientManager.create(appForm.getName(), appForm.getDescription(), Arrays.asList(OAuthScope.READ));
-        redirectAttrs.addFlashAttribute("clientId", creds.getClientId());
-        redirectAttrs.addFlashAttribute("secret", creds.getSecret());
-        return configProvider.getAddAppPostSuccessView();
-    }
 
     @Override
     protected String getMappingPath() {
@@ -46,11 +41,16 @@ public class AddAppController extends OAuthTokenBaseController {
     @Override
     protected ModelAndView handlePost(HttpServletRequest request, HttpServletResponse response)
             throws MethodNotSupportedException, Exception {
-//        OAuthCredentials creds = clientManager.create(request.getParameter("name"), request.getParameter("description"), Arrays.asList(OAuthScope.READ));
-//        redirectAttrs.addFlashAttribute("clientId", creds.getClientId());
-//        redirectAttrs.addFlashAttribute("secret", creds.getSecret());
-//        return configProvider.getAddAppPostSuccessView();
-        return null;
+
+        OAuthCredentials creds = clientManager.create(request.getParameter("name"), request.getParameter("description"),
+                Arrays.asList(OAuthScope.READ));
+        FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
+
+        flashMap.put("clientId", creds.getClientId());
+        flashMap.put("secret", creds.getSecret());
+        ModelAndView model = new ModelAndView();
+        model.setViewName(configProvider.getAddAppPostSuccessView());
+        return model;
     }
 
     @Override
@@ -66,5 +66,5 @@ public class AddAppController extends OAuthTokenBaseController {
     protected String getFailureViewName() {
         return configProvider.getAddAppView();
     }
-    
+
 }

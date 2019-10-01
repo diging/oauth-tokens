@@ -2,15 +2,13 @@ package edu.asu.diging.oauth.tokens.core.service.impl;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.provider.ClientDetails;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.ClientRegistrationException;
 
 import edu.asu.diging.oauth.tokens.core.data.OAuthClientRepository;
 import edu.asu.diging.oauth.tokens.core.model.impl.OAuthClient;
@@ -20,7 +18,9 @@ import edu.asu.diging.oauth.tokens.core.service.OAuthCredentials;
 import edu.asu.diging.oauth.tokens.core.service.OAuthScope;
 
 @Transactional
-public class OAuthClientManager implements ClientDetailsService, IOAuthClientManager {
+public class OAuthClientManager implements IOAuthClientManager {
+    
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private OAuthClientRepository clientRepo;
     
@@ -32,20 +32,7 @@ public class OAuthClientManager implements ClientDetailsService, IOAuthClientMan
         this.clientRepo = repo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.accessTokenValidity = accessTokenValidity;
-    }
-
-    /* (non-Javadoc)
-     * @see edu.asu.diging.citesphere.core.service.oauth.impl.IOAuthClientManager#loadClientByClientId(java.lang.String)
-     */
-    @Override
-    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        Optional<OAuthClient> clientOptional = clientRepo.findById(clientId);
-        if (clientOptional.isPresent()) {
-            ClientDetails details = clientOptional.get();
-            details.getAuthorities().size();
-            return details;
-        }
-        return null;
+        logger.debug("Manager configured.");
     }
     
     /* (non-Javadoc)
