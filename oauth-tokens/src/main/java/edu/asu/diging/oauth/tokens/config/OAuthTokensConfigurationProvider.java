@@ -16,7 +16,7 @@ public interface OAuthTokensConfigurationProvider {
 
     String getAddAppView();
 
-    String getAddAppPostSuccessView();
+    String getAddAppSuccessView();
 
     
 

@@ -1,17 +1,17 @@
 package edu.asu.diging.oauth.tokens.web;
 
 import java.util.Arrays;
+import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -48,8 +48,15 @@ public class AddAppController extends OAuthTokenBaseController {
 
         flashMap.put("clientId", creds.getClientId());
         flashMap.put("secret", creds.getSecret());
+        
+        FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
+        if (flashMapManager == null) {
+            throw new IllegalStateException("FlashMapManager not found despite output FlashMap having been set");
+        }
+        flashMapManager.saveOutputFlashMap(flashMap, request, response);
+        
         ModelAndView model = new ModelAndView();
-        model.setViewName(configProvider.getAddAppPostSuccessView());
+        model.setViewName(configProvider.getAddAppSuccessView());
         return model;
     }
 
@@ -59,6 +66,12 @@ public class AddAppController extends OAuthTokenBaseController {
         ModelAndView model = new ModelAndView();
         model.getModelMap().addAttribute("appForm", new AppForm());
         model.setViewName(configProvider.getAddAppView());
+        
+        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+        if (inputFlashMap != null) {
+          inputFlashMap.entrySet().forEach(e -> model.getModelMap().addAttribute(e.getKey(), e.getValue()));
+        }
+        
         return model;
     }
 

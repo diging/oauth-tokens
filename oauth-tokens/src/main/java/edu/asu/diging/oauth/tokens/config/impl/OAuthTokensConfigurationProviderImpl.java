@@ -35,8 +35,8 @@ public class OAuthTokensConfigurationProviderImpl implements OAuthTokensConfigur
         return config.getAddAppPath();
     }
     @Override
-    public String getAddAppPostSuccessView() {
-        return config.getAddAppPostSuccessView();
+    public String getAddAppSuccessView() {
+        return config.getAddAppSuccessView();
     }
     @Override
     public String getAddAppView() {

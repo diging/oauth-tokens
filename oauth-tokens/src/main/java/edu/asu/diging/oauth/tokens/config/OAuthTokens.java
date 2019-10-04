@@ -10,8 +10,8 @@ public interface OAuthTokens {
 
     String getAddAppView();
 
-    void setAddAppPostSuccessView(String addAppPostSuccessView);
+    void setAddAppSuccessView(String addAppPostSuccessView);
 
-    String getAddAppPostSuccessView();
+    String getAddAppSuccessView();
 
 }

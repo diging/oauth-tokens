@@ -2,6 +2,8 @@ package edu.asu.diging.oauth.tokens.core.service.impl;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -12,6 +14,7 @@ import edu.asu.diging.oauth.tokens.core.data.OAuthClientRepository;
 import edu.asu.diging.oauth.tokens.core.model.impl.OAuthClient;
 
 @Service
+@Transactional
 public class OAuthClientDetailsService implements ClientDetailsService {
 
     @Autowired

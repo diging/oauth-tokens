@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -30,18 +31,18 @@ public class OAuthClient implements IOAuthClient, ClientDetails {
     private String clientId;
     private String name;
     private String description;
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     private Set<String> resourceIds;
     private boolean secretRequired;
     private String clientSecret;
     private boolean scoped;
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     private Set<String> scope;
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     private Set<String> authorizedGrantTypes;
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     private Set<String> registeredRedirectUri;
-    @ElementCollection()
+    @ElementCollection(fetch=FetchType.EAGER)
     private Collection<GrantedAuthority> authorities;
     private int accessTokenValiditySeconds;
     private int refereshTokenValiditySeconds;

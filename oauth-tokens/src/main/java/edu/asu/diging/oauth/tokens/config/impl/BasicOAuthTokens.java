@@ -5,7 +5,7 @@ import edu.asu.diging.oauth.tokens.config.OAuthTokens;
 public class BasicOAuthTokens implements OAuthTokens {
 
     private String addAppGet = "/admin/apps/add";
-    private String addAppPostSuccessView = "redirect:/admin/apps/add";
+    private String addAppSuccessView = "redirect:/admin/apps/add";
     private String addAppView = "admin/apps/add";
     
     /* (non-Javadoc)
@@ -23,12 +23,12 @@ public class BasicOAuthTokens implements OAuthTokens {
         this.addAppGet = addAppGet;
     }
     @Override
-    public String getAddAppPostSuccessView() {
-        return addAppPostSuccessView;
+    public String getAddAppSuccessView() {
+        return addAppSuccessView;
     }
     @Override
-    public void setAddAppPostSuccessView(String addAppPostSuccessView) {
-        this.addAppPostSuccessView = addAppPostSuccessView;
+    public void setAddAppSuccessView(String addAppPostSuccessView) {
+        this.addAppSuccessView = addAppPostSuccessView;
     }
     @Override
     public String getAddAppView() {
