@@ -38,4 +38,6 @@ Add a view in ```views/admin/apps/add.html``` with a form to add new apps, e.g. 
 
 After a new oauth client has been created, oauth-tokens will add the new client id and secret as ```clientId``` and ```secret``` into the model.
 
+Make sure to scan the package ```edu.asu.diging.oauth.tokens``` for Spring components. The JPA repositories of oauth-tokens are located in ```edu.asu.diging.oauth.tokens.core.data``` (to be used with ```@EnableJpaRepositories```). Your entity manager factory bean has to scan ```edu.asu.diging.oauth.tokens.core.model``` for model classes.
+
 See [the wiki](https://github.com/diging/oauth-tokens/wiki/Setup) for how to set up the project with Spring OAuth2.
