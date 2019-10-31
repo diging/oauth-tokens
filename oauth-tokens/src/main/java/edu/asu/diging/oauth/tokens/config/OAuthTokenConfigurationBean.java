@@ -15,7 +15,7 @@ public class OAuthTokenConfigurationBean {
     private OAuthTokensConfigurationProvider configProvider;
     
     @Bean
-    public SimpleUrlHandlerMapping handlerMapping() {
+    public SimpleUrlHandlerMapping oauthTokenHandlerMapping() {
         SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
         
         Map<String, Object> urlMappings = new HashMap<>();
