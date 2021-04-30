@@ -33,7 +33,7 @@
 	</scm>
 
 	<properties>
-		<org.springframework-version>5.1.5.RELEASE</org.springframework-version>
+		<org.springframework-version>5.1.18.RELEASE</org.springframework-version>
 		<spring-data.version>Lovelace-RELEASE</spring-data.version>
 		<spring-security-version>5.1.5.RELEASE</spring-security-version>
 		<spring-security-oauth2-version>2.3.6.RELEASE</spring-security-oauth2-version>
